@@ -38,10 +38,7 @@ namespace PrestigeMinus
                 typeof(AbilitySpawnFx))
                 .SetAnimation(Kingmaker.Visual.Animation.Kingmaker.Actions.UnitAnimationActionCastSpell.CastAnimationStyle.Immediate)
                 .AddAbilityEffectRunAction(ActionsBuilder.New()
-                    .Add<MinusShowPartySelection>(c => {
-                        c.ActionsAfterPartySelection = ActionsBuilder.New().CastSpell(SuperAbilityGuid).Build();
-                        c.ActionsIfCanceled = ActionsBuilder.New().CastSpell(SuperAbilityGuid).Build();
-                    })
+                    .Add<MinusShowPartySelection>()
                     .Build())
                 .SetDisplayName(StyleDisplayName)
                 .SetDescription(StyleDescription)
@@ -129,8 +126,7 @@ namespace PrestigeMinus
                     else if (Game.Instance.Player.Party.Count() > part.partysize)
                     {
                         UIUtility.SendWarning("Party too big!");
-                        this.ActionsAfterPartySelection.Run();
-                        //this.RunAction();
+                        this.RunAction();
                     }
                 }, delegate
                 {
@@ -141,14 +137,10 @@ namespace PrestigeMinus
                     else if (Game.Instance.Player.Party.Count() > part.partysize)
                     {
                         UIUtility.SendWarning("Party too big!");
-                        this.ActionsIfCanceled.Run();
+                        this.RunAction();
                     }
                 }, true, null, null);
             }, true);
         }
-
-        public ActionList ActionsAfterPartySelection;
-
-        public ActionList ActionsIfCanceled;
     }
 }
