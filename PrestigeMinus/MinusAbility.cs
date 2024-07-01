@@ -101,6 +101,18 @@ namespace PrestigeMinus
                 UIUtility.SendWarning("Choose your party size!");
                 isnew = true;
             }
+            else
+            {
+                int exp = part.TrySizeUp();
+                if (exp == 0)
+                {
+                    UIUtility.SendWarning("Party size up!");
+                }
+                else if (exp > 1)
+                {
+                    UIUtility.SendWarning("EXP needed for party size up: " + exp.ToString());
+                }
+            }
             EventBus.RaiseEvent<IGroupChangerHandler>(delegate (IGroupChangerHandler h)
             {
                 h.HandleCall(delegate
