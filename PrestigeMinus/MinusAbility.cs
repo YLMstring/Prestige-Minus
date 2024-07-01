@@ -106,7 +106,7 @@ namespace PrestigeMinus
                 int exp = part.TrySizeUp();
                 if (exp == 0)
                 {
-                    UIUtility.SendWarning("Party size up!");
+                    UIUtility.SendWarning("Party size up! Now is " + part.partysize.ToString());
                 }
                 else if (exp > 1)
                 {
