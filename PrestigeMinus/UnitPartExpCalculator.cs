@@ -46,19 +46,19 @@ namespace PrestigeMinus
                 if (kc == __instance.Owner.Unit)
                 {
                     Main.Logger.Info("Original exp: " + exp.ToString());
-                    var part = kc.Get<UnitPartExpCalculator>();
+                    var part = kc.Ensure<UnitPartExpCalculator>();
                     part.realexp += exp;
                     if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                     {
                         part.partysize = 6;
                         return;
                     }
-                    exp = exp * part.partysize / 6;
+                    exp = exp * 6 / part.partysize;
                     Main.Logger.Info("Altered exp: " + exp.ToString());
                     if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
                     {
                         exp = 1;
-                        UIUtility.SendWarning("Fatal Error, turn owlcat custom experience options off plz");
+                        UIUtility.SendWarning("Fatal Error!!! Turn owlcat custom experience options off plz");
                     }
                 }
                 else
@@ -77,7 +77,7 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
-                    var part = kc.Get<UnitPartExpCalculator>();
+                    var part = kc.Ensure<UnitPartExpCalculator>();
                     part.partysize = 6;
                     return;
                 }

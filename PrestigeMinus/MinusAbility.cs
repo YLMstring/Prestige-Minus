@@ -92,11 +92,11 @@ namespace PrestigeMinus
             {
                 if (Game.Instance.LoadedAreaState.Settings.CapitalPartyMode)
                 {
-                    UIUtility.SendWarning("Go out of the safe area!");
+                    UIUtility.SendWarning("Go out of the safe zone!");
                     return;
                 }
                 var kc = Game.Instance.Player.MainCharacter.Value;
-                var part = kc.Get<UnitPartExpCalculator>();
+                var part = kc.Ensure<UnitPartExpCalculator>();
                 bool isnew = false;
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
@@ -117,7 +117,7 @@ namespace PrestigeMinus
                     }
                     else if (exp > 1)
                     {
-                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for party size up: " + exp.ToString());
+                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for next party size up: " + exp.ToString());
                     }
                     else
                     {
@@ -146,19 +146,24 @@ namespace PrestigeMinus
                                 UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
                             }
                         }
+                        else if (Game.Instance.Player.Party.Count() > part.partysize)
+                        {
+                            UIUtility.SendWarning("Party too big!");
+                            RunAction();
+                        }
                     }, delegate
                     {
                         if (isnew)
                         {
                             UIUtility.SendWarning("Nothing happened!");
                         }
+                        else if (Game.Instance.Player.Party.Count() > part.partysize)
+                        {
+                            UIUtility.SendWarning("Party too big!");
+                            RunAction();
+                        }
                     }, true, null, null);
                 }, true);
-                if (Game.Instance.Player.Party.Count() > part.partysize)
-                {
-                    UIUtility.SendWarning("Party too big!");
-                    RunAction();
-                }
             }
             catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
         }
