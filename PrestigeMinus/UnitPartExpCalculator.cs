@@ -20,16 +20,18 @@ namespace PrestigeMinus
         public int realexp = 0;
 
         public int partysize = 6;
-        public void TrySizeUp()
+        public int TrySizeUp()
         {
-            if (partysize >= 6) { return; }
+            if (partysize >= 6) { return -1; }
             int willbesize = partysize + 1;
             int level20exp = 3600000;
             int expneeded = level20exp * willbesize / 6;
             if (realexp >= expneeded) 
             {
                 partysize += 1;
+                return 0;
             }
+            return expneeded - realexp;
         }
     }
 
@@ -57,7 +59,6 @@ namespace PrestigeMinus
                 exp = Math.Max(exp, 1);
             }
         }
-
         static void Postfix(ref UnitProgressionData __instance)
         {
             var kc = Game.Instance.Player.MainCharacter.Value;
