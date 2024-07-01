@@ -98,6 +98,11 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Get<UnitPartExpCalculator>();
                 bool isnew = false;
+                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
+                {
+                    part.partysize = 6;
+                    return;
+                }
                 if (part.partysize == 6 && part.realexp < 3600000)
                 {
                     UIUtility.SendWarning("Choose your party size!");
@@ -141,24 +146,19 @@ namespace PrestigeMinus
                                 UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
                             }
                         }
-                        else if (Game.Instance.Player.Party.Count() > part.partysize)
-                        {
-                            UIUtility.SendWarning("Party too big!");
-                            this.RunAction();
-                        }
                     }, delegate
                     {
                         if (isnew)
                         {
                             UIUtility.SendWarning("Nothing happened!");
                         }
-                        else if (Game.Instance.Player.Party.Count() > part.partysize)
-                        {
-                            UIUtility.SendWarning("Party too big!");
-                            this.RunAction();
-                        }
                     }, true, null, null);
                 }, true);
+                if (Game.Instance.Player.Party.Count() > part.partysize)
+                {
+                    UIUtility.SendWarning("Party too big!");
+                    RunAction();
+                }
             }
             catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
         }
