@@ -39,7 +39,7 @@ namespace PrestigeMinus
     [HarmonyPatch(typeof(GroupChangerCommonVM), nameof(GroupChangerCommonVM.CloseCondition))]
     internal class PartyLimitFix2
     {
-        static void Postfix(ref GroupChangerCommonVM __instance, ref bool __result)
+        static void Postfix(ref bool __result)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace PrestigeMinus
                     part.partysize = 6;
                     return;
                 }
-                if (__instance.PartyCharacterRef.Count() > part.partysize)
+                if (Game.Instance.Player.PartyCharacters.Count() > part.partysize)
                 {
                     __result = false;
                 }
