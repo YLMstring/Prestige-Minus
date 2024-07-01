@@ -110,7 +110,11 @@ namespace PrestigeMinus
                 }
                 else if (exp > 1)
                 {
-                    UIUtility.SendWarning("EXP needed for party size up: " + exp.ToString());
+                    UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for party size up: " + exp.ToString());
+                }
+                else
+                {
+                    UIUtility.SendWarning("Party size is 6");
                 }
             }
             EventBus.RaiseEvent<IGroupChangerHandler>(delegate (IGroupChangerHandler h)
