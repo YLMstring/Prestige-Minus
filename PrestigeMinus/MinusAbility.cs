@@ -88,75 +88,79 @@ namespace PrestigeMinus
         // Token: 0x0600F522 RID: 62754 RVA: 0x003E2561 File Offset: 0x003E0761
         public override void RunAction()
         {
-            if (Game.Instance.LoadedAreaState.Settings.CapitalPartyMode)
+            try
             {
-                UIUtility.SendWarning("Go out of the safe area!"); 
-                return;
-            }
-            var kc = Game.Instance.Player.MainCharacter.Value;
-            var part = kc.Get<UnitPartExpCalculator>();
-            bool isnew = false;
-            if (part.partysize == 6 && part.realexp < 3600000)
-            {
-                UIUtility.SendWarning("Choose your party size!");
-                isnew = true;
-            }
-            else
-            {
-                int exp = part.TrySizeUp();
-                if (exp == 0)
+                if (Game.Instance.LoadedAreaState.Settings.CapitalPartyMode)
                 {
-                    UIUtility.SendWarning("Party size up! Now is " + part.partysize.ToString());
+                    UIUtility.SendWarning("Go out of the safe area!");
+                    return;
                 }
-                else if (exp > 1)
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                var part = kc.Get<UnitPartExpCalculator>();
+                bool isnew = false;
+                if (part.partysize == 6 && part.realexp < 3600000)
                 {
-                    UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for party size up: " + exp.ToString());
+                    UIUtility.SendWarning("Choose your party size!");
+                    isnew = true;
                 }
                 else
                 {
-                    UIUtility.SendWarning("Party size is 6");
-                }
-            }
-            EventBus.RaiseEvent<IGroupChangerHandler>(delegate (IGroupChangerHandler h)
-            {
-                h.HandleCall(delegate
-                {
-                    Game.Instance.Player.FixPartyAfterChange(true);
-                    if (isnew)
+                    int exp = part.TrySizeUp();
+                    if (exp == 0)
                     {
-                        part.partysize = Game.Instance.Player.Party.Count();
-                        if (part.partysize == 1)
+                        UIUtility.SendWarning("Party size up! Now is " + part.partysize.ToString());
+                    }
+                    else if (exp > 1)
+                    {
+                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for party size up: " + exp.ToString());
+                    }
+                    else
+                    {
+                        UIUtility.SendWarning("Party size is 6");
+                    }
+                }
+                EventBus.RaiseEvent<IGroupChangerHandler>(delegate (IGroupChangerHandler h)
+                {
+                    h.HandleCall(delegate
+                    {
+                        Game.Instance.Player.FixPartyAfterChange(true);
+                        if (isnew)
                         {
-                            part.partysize = 6;
-                            UIUtility.SendWarning("Solo mode is not supported!");
+                            part.partysize = Game.Instance.Player.Party.Count();
+                            if (part.partysize == 1)
+                            {
+                                part.partysize = 6;
+                                UIUtility.SendWarning("Solo mode is not supported!");
+                            }
+                            else if (part.partysize == 6)
+                            {
+                                UIUtility.SendWarning("Nothing happened!");
+                            }
+                            else
+                            {
+                                UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
+                            }
                         }
-                        else if (part.partysize == 6)
+                        else if (Game.Instance.Player.Party.Count() > part.partysize)
+                        {
+                            UIUtility.SendWarning("Party too big!");
+                            this.RunAction();
+                        }
+                    }, delegate
+                    {
+                        if (isnew)
                         {
                             UIUtility.SendWarning("Nothing happened!");
                         }
-                        else
+                        else if (Game.Instance.Player.Party.Count() > part.partysize)
                         {
-                            UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
+                            UIUtility.SendWarning("Party too big!");
+                            this.RunAction();
                         }
-                    }
-                    else if (Game.Instance.Player.Party.Count() > part.partysize)
-                    {
-                        UIUtility.SendWarning("Party too big!");
-                        this.RunAction();
-                    }
-                }, delegate
-                {
-                    if (isnew)
-                    {
-                        UIUtility.SendWarning("Nothing happened!");
-                    }
-                    else if (Game.Instance.Player.Party.Count() > part.partysize)
-                    {
-                        UIUtility.SendWarning("Party too big!");
-                        this.RunAction();
-                    }
-                }, true, null, null);
-            }, true);
+                    }, true, null, null);
+                }, true);
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
         }
     }
 }

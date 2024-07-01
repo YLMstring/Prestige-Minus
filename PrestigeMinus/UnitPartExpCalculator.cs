@@ -40,44 +40,55 @@ namespace PrestigeMinus
     {
         static void Prefix(ref UnitProgressionData __instance, ref int exp)
         {
-            var kc = Game.Instance.Player.MainCharacter.Value;
-            if (kc == __instance.Owner.Unit)
+            try
             {
-                var part = kc.Get<UnitPartExpCalculator>();
-                part.realexp += exp;
-                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0) 
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                if (kc == __instance.Owner.Unit)
                 {
-                    part.partysize = 6;
-                    return; 
+                    Main.Logger.Info("Original exp: " + exp.ToString());
+                    var part = kc.Get<UnitPartExpCalculator>();
+                    part.realexp += exp;
+                    if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
+                    {
+                        part.partysize = 6;
+                        return;
+                    }
+                    exp = exp * part.partysize / 6;
+                    Main.Logger.Info("Altered exp: " + exp.ToString());
+                    if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
+                    {
+                        exp = 1;
+                        UIUtility.SendWarning("Fatal Error, turn owlcat custom experience options off plz");
+                    }
                 }
-                exp = exp * part.partysize / 6;
-                if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
+                else
                 {
-                    exp = 1;
-                    UIUtility.SendWarning("Fatal Error, turn owlcat custom experience options off plz");
+                    exp = Math.Min(exp, kc.Progression.Experience - __instance.Owner.Progression.Experience);
+                    exp = Math.Max(exp, 1);
                 }
             }
-            else
-            {
-                exp = Math.Min(exp, kc.Progression.Experience - __instance.Owner.Progression.Experience);
-                exp = Math.Max(exp, 1);
-            }
+            catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorFix1", e); }
+            
         }
         static void Postfix(ref UnitProgressionData __instance)
         {
-            var kc = Game.Instance.Player.MainCharacter.Value;
-            if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
+            try
             {
-                var part = kc.Get<UnitPartExpCalculator>();
-                part.partysize = 6;
-                return;
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
+                {
+                    var part = kc.Get<UnitPartExpCalculator>();
+                    part.partysize = 6;
+                    return;
+                }
+                if (kc != __instance.Owner.Unit) { return; }
+                foreach (var unit in Game.Instance.Player.Party)
+                {
+                    if (unit == kc) { continue; }
+                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
+                }
             }
-            if (kc != __instance.Owner.Unit) { return; }
-            foreach (var unit in Game.Instance.Player.Party)
-            {
-                if (unit == kc) { continue; }
-                unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
-            }
+            catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorFix2", e); }
         }
     }
 }
