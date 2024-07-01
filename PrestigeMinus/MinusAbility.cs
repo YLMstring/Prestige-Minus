@@ -126,7 +126,6 @@ namespace PrestigeMinus
                 {
                     h.HandleCall(delegate
                     {
-                        Game.Instance.Player.FixPartyAfterChange(true);
                         if (isnew)
                         {
                             part.partysize = Game.Instance.Player.Party.Count();
@@ -144,6 +143,7 @@ namespace PrestigeMinus
                                 UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
                             }
                         }
+                        Game.Instance.Player.FixPartyAfterChange(true);
                     }, delegate
                     {
                         if (isnew)
