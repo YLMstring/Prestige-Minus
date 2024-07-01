@@ -57,7 +57,7 @@ public static class Main {
                 }
                 Logger.Info("Prestige Minus started");
                 Initialized = true;
-                //Deskari.DeskariConfigure();
+                MinusAbility.StyleConfigure();
             }
             catch (Exception e) { Logger.Error("Prestige Minus failed", e); }
 
