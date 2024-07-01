@@ -144,21 +144,11 @@ namespace PrestigeMinus
                                 UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
                             }
                         }
-                        else if (Game.Instance.Player.Party.Count() > part.partysize)
-                        {
-                            UIUtility.SendWarning("Party too big!");
-                            RunAction();
-                        }
                     }, delegate
                     {
                         if (isnew)
                         {
                             UIUtility.SendWarning("Nothing happened!");
-                        }
-                        else if (Game.Instance.Player.Party.Count() > part.partysize)
-                        {
-                            UIUtility.SendWarning("Party too big!");
-                            RunAction();
                         }
                     }, true, null, null);
                 }, true);
