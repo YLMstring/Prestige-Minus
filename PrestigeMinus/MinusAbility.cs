@@ -33,9 +33,7 @@ namespace PrestigeMinus
             var icon = AbilityRefs.TricksterTrickFate.Reference.Get().Icon;
 
             var ability = AbilityConfigurator.New(SuperAbility, SuperAbilityGuid)
-                .CopyFrom(
-                AbilityRefs.Sleep,
-                typeof(AbilitySpawnFx))
+                .AddComponent(AbilityRefs.Sleep.Reference.Get().GetComponent<AbilitySpawnFx>())
                 .SetAnimation(Kingmaker.Visual.Animation.Kingmaker.Actions.UnitAnimationActionCastSpell.CastAnimationStyle.Immediate)
                 .AddAbilityEffectRunAction(ActionsBuilder.New()
                     .Add<MinusShowPartySelection>()
