@@ -45,7 +45,11 @@ namespace PrestigeMinus
             {
                 var part = kc.Get<UnitPartExpCalculator>();
                 part.realexp += exp;
-                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0) { return; }
+                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0) 
+                {
+                    part.partysize = 6;
+                    return; 
+                }
                 exp = exp * part.partysize / 6;
                 if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
                 {
@@ -62,7 +66,12 @@ namespace PrestigeMinus
         static void Postfix(ref UnitProgressionData __instance)
         {
             var kc = Game.Instance.Player.MainCharacter.Value;
-            if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0) { return; }
+            if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
+            {
+                var part = kc.Get<UnitPartExpCalculator>();
+                part.partysize = 6;
+                return;
+            }
             if (kc != __instance.Owner.Unit) { return; }
             foreach (var unit in Game.Instance.Player.Party)
             {
