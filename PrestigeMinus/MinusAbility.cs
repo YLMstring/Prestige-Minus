@@ -163,7 +163,7 @@ namespace PrestigeMinus
                             if (part.Partysize == 1)
                             {
                                 part.Partysize = 6;
-                                UIUtility.SendWarning("Solo mode is not supported!");
+                                UIUtility.SendWarning("Solo is not supported!");
                             }
                             else if (part.Partysize == 6)
                             {
