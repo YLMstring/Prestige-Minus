@@ -57,14 +57,14 @@ namespace PrestigeMinus
                     Main.Logger.Info("Altered exp: " + exp.ToString());
                     if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
                     {
-                        exp = 1;
+                        exp = 0;
                         UIUtility.SendWarning("Fatal Error!!! Turn owlcat custom experience options off plz");
                     }
                 }
                 else
                 {
                     exp = Math.Min(exp, kc.Progression.Experience - __instance.Owner.Progression.Experience);
-                    exp = Math.Max(exp, 1);
+                    exp = Math.Max(exp, 0);
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorFix1", e); }

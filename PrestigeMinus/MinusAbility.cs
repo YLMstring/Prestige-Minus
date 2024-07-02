@@ -115,7 +115,7 @@ namespace PrestigeMinus
                     }
                     else if (exp > 1)
                     {
-                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". EXP needed for next party size up: " + exp.ToString());
+                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
                     }
                     else
                     {
@@ -144,6 +144,11 @@ namespace PrestigeMinus
                             }
                         }
                         Game.Instance.Player.FixPartyAfterChange(true);
+                        foreach (var unit in Game.Instance.Player.Party)
+                        {
+                            if (unit == kc) { continue; }
+                            unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
+                        }
                     }, delegate
                     {
                         if (isnew)
