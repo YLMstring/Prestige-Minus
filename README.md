@@ -21,6 +21,7 @@
 - If you could have reached lv20 with a party of 4, the maximum party size becomes 4
 - If you could have reached lv20 with a party of 5, the maximum party size becomes 5
 - If you could have reached lv20 with a party of 6, the maximum party size becomes 6
+- If you gain any swarm level, the party size will immediately be forced to 6
 
 ## Thanks to  
 -   WittleWolfie for his [Blueprint-Core](https://wittlewolfie.github.io/WW-Blueprint-Core/index.html)
