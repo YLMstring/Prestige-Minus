@@ -24,8 +24,8 @@ namespace PrestigeMinus
 {
     internal class MinusAbility
     {
-        private static readonly string SuperDisplayName = "MinusAbility.Name";
-        private static readonly string SuperDescription = "MinusAbility.Description";
+        private static readonly string SuperDisplayName = "MinusMainAbility.Name";
+        private static readonly string SuperDescription = "MinusMainAbility.Description";
 
         private const string SuperAbility = "MinusAbility.SuperAbility";
         private static readonly string SuperAbilityGuid = "{8DAEED2C-92E9-498B-A543-C33C53C05ED9}";
@@ -75,8 +75,8 @@ namespace PrestigeMinus
                     .Configure();
         }
 
-        private static readonly string SizeUpDisplayName = "MinusAbility.Name";
-        private static readonly string SizeUpDescription = "MinusAbility.Description";
+        private static readonly string SizeUpDisplayName = "MinusSizeUpAbility.Name";
+        private static readonly string SizeUpDescription = "MinusSizeUpAbility.Description";
 
         private const string SizeUpAbility = "MinusAbility.SizeUpAbility";
         private static readonly string SizeUpAbilityGuid = "{A584EF78-C29C-49F8-A256-B77BC1F678A1}";
