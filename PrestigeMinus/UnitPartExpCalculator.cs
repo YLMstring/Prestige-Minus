@@ -16,6 +16,8 @@ using BlueprintCore.Utils;
 using Kingmaker.Blueprints;
 using Kingmaker.UnitLogic.Buffs;
 using Kingmaker.Designers;
+using Kingmaker.Designers.EventConditionActionSystem.Actions;
+using Kingmaker.PubSubSystem;
 
 namespace PrestigeMinus
 {
@@ -144,6 +146,24 @@ namespace PrestigeMinus
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorFix2", e); }
+        }
+    }
+
+    [HarmonyPatch(typeof(Player), nameof(Player.FixPartyAfterChange))]
+    internal class ExpCalculatorCompanionFix
+    {
+        static void Postfix()
+        {
+            try
+            {
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                foreach (var unit in Game.Instance.Player.Party)
+                {
+                    if (unit == kc) { continue; }
+                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
+                }
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorCompanionFix", e); }
         }
     }
 }
