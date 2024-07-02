@@ -40,15 +40,15 @@ namespace PrestigeMinus
             var icon = AbilityRefs.TricksterTrickFate.Reference.Get().Icon;
 
             var BuffSuperAbility = BuffConfigurator.New(SuperAbilitybuff, SuperAbilitybuffGuid)
-              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
-              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
+              .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
+              .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
               .SetRanks(7800000)
               .Configure();
 
             var BuffSuperAbility2 = BuffConfigurator.New(SuperAbility2buff, SuperAbility2buffGuid)
-              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
-              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
-              .SetRanks(7800000)
+              .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
+              .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
+              .SetRanks(6)
               .Configure();
 
             var ability = AbilityConfigurator.New(SuperAbility, SuperAbilityGuid)
@@ -130,7 +130,7 @@ namespace PrestigeMinus
                     int exp = part.TrySizeUp();
                     if (exp == 0)
                     {
-                        UIUtility.SendWarning("Party size up! Now is " + part.Partysize.ToString());
+                        UIUtility.SendWarning("Ready to increase party size to " + part.Partysize.ToString());
                     }
                     else if (exp > 1)
                     {

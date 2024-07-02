@@ -51,23 +51,23 @@ namespace PrestigeMinus
         {
             get
             {
-                var fact = Owner.GetFact(RealexpBuff);
+                var fact = Owner.GetFact(PartysizeBuff);
                 if (fact != null)
                 {
                     return fact.GetRank();
                 }
-                return 0;
+                return 6;
             }
             set
             {
-                var fact = Owner.GetFact(RealexpBuff) as Buff;
+                var fact = Owner.GetFact(PartysizeBuff) as Buff;
                 if (fact != null)
                 {
                     fact.SetRank(value);
                 }
                 else
                 {
-                    fact = Owner.AddBuff(RealexpBuff, Owner);
+                    fact = Owner.AddBuff(PartysizeBuff, Owner);
                     fact.SetRank(value);
                 }
             }
@@ -83,7 +83,6 @@ namespace PrestigeMinus
             int expneeded = level20exp * willbesize / 6;
             if (Realexp >= expneeded) 
             {
-                Partysize += 1;
                 return 0;
             }
             return expneeded - Realexp;
