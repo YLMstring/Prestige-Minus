@@ -1,5 +1,6 @@
 # Prestige Minus for WotR
 ## Requirements: Owlcat custom experience options turned off
+- The mod does not require [Prestige Plus](https://github.com/YLMstring/Prestige-Plus)!
 - Features are not toggleable!
 ### Reasons to install the mod
 - Play WotR with a smaller party!!!
