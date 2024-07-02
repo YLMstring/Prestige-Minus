@@ -136,7 +136,7 @@ namespace PrestigeMinus
                 foreach (var unit in Game.Instance.Player.Party)
                 {
                     if (unit == kc) { continue; }
-                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
+                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience, false);
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorFix2", e); }
@@ -154,7 +154,7 @@ namespace PrestigeMinus
                 foreach (var unit in Game.Instance.Player.Party)
                 {
                     if (unit == kc) { continue; }
-                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
+                    unit.Progression.AdvanceExperienceTo(kc.Progression.Experience, false);
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to ExpCalculatorCompanionFix", e); }

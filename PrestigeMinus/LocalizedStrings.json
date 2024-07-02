@@ -8,8 +8,8 @@
   },
   {
     "Key": "MinusMainAbility.Description",
-    "enGB": "Gather your party, then if your party size is not set, it's set to the current number.",
-    "ruRU": "Gather your party, then if your party size is not set, it's set to the current number.",
+    "enGB": "Gather your party, then if your party size is not set, it will be set to the current number.",
+    "ruRU": "Gather your party, then if your party size is not set, it will be set to the current number.",
     "zhCN": "召集队伍，若你尚未设定最大队伍人数，将其设定为调整后的队伍人数。"
   },
   {

@@ -68,6 +68,7 @@ namespace PrestigeMinus
                 .AddHideFeatureInInspect()
                 .AddComponent<AbilityRequirementKC>()
                 .AddAbilityCasterHasNoFacts([FeatureRefs.SwarmFormFeature.ToString()])
+                .AddHideDCFromTooltip()
                 .Configure();
 
             FeatureConfigurator.For(FeatureRefs.SkillAbilities)
@@ -101,6 +102,7 @@ namespace PrestigeMinus
                 .AddHideFeatureInInspect()
                 .AddComponent<AbilityRequirementKC>()
                 .AddAbilityCasterHasNoFacts([FeatureRefs.SwarmFormFeature.ToString()])
+                .AddHideDCFromTooltip()
                 .Configure();
 
             FeatureConfigurator.For(FeatureRefs.SkillAbilities)
