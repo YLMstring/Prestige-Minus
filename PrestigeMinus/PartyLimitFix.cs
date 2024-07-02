@@ -24,10 +24,10 @@ namespace PrestigeMinus
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
-                    part.partysize = 6;
+                    part.Partysize = 6;
                     return;
                 }
-                if (__instance.PartyCharacterRef.Count() > part.partysize)
+                if (__instance.PartyCharacterRef.Count() > part.Partysize)
                 {
                     __result = false;
                 }
@@ -47,10 +47,10 @@ namespace PrestigeMinus
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
-                    part.partysize = 6;
+                    part.Partysize = 6;
                     return;
                 }
-                if (Game.Instance.Player.PartyCharacters.Count() > part.partysize)
+                if (Game.Instance.Player.PartyCharacters.Count() > part.Partysize)
                 {
                     __result = false;
                 }

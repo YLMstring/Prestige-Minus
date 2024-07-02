@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlueprintCore.Blueprints.CustomConfigurators.UnitLogic.Buffs;
 
 namespace PrestigeMinus
 {
@@ -28,9 +29,27 @@ namespace PrestigeMinus
 
         private const string SuperAbility = "MinusAbility.SuperAbility";
         private static readonly string SuperAbilityGuid = "{8DAEED2C-92E9-498B-A543-C33C53C05ED9}";
+
+        private const string SuperAbilitybuff = "SuperAbility.SuperAbilitybuff";
+        public static readonly string SuperAbilitybuffGuid = "{E6426CE4-FC67-4EA1-A89C-169304336F28}";
+
+        private const string SuperAbility2buff = "SuperAbility.SuperAbility2buff";
+        public static readonly string SuperAbility2buffGuid = "{E9386587-79B5-427B-8FD6-43D30D5ADA1E}";
         public static void StyleConfigure()
         {
             var icon = AbilityRefs.TricksterTrickFate.Reference.Get().Icon;
+
+            var BuffSuperAbility = BuffConfigurator.New(SuperAbilitybuff, SuperAbilitybuffGuid)
+              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
+              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
+              .SetRanks(7800000)
+              .Configure();
+
+            var BuffSuperAbility2 = BuffConfigurator.New(SuperAbility2buff, SuperAbility2buffGuid)
+              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
+              .SetFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
+              .SetRanks(7800000)
+              .Configure();
 
             var ability = AbilityConfigurator.New(SuperAbility, SuperAbilityGuid)
                 .AddComponent(AbilityRefs.Sleep.Reference.Get().GetComponent<AbilitySpawnFx>())
@@ -98,10 +117,10 @@ namespace PrestigeMinus
                 bool isnew = false;
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
-                    part.partysize = 6;
+                    part.Partysize = 6;
                     return;
                 }
-                if (part.partysize == 6 && part.realexp < 3600000)
+                if (part.Partysize == 6 && part.Realexp < 3600000)
                 {
                     UIUtility.SendWarning("Choose your party size!");
                     isnew = true;
@@ -111,11 +130,11 @@ namespace PrestigeMinus
                     int exp = part.TrySizeUp();
                     if (exp == 0)
                     {
-                        UIUtility.SendWarning("Party size up! Now is " + part.partysize.ToString());
+                        UIUtility.SendWarning("Party size up! Now is " + part.Partysize.ToString());
                     }
                     else if (exp > 1)
                     {
-                        UIUtility.SendWarning("Party size is " + part.partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
+                        UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
                     }
                     else
                     {
@@ -128,19 +147,19 @@ namespace PrestigeMinus
                     {
                         if (isnew)
                         {
-                            part.partysize = Game.Instance.Player.Party.Count();
-                            if (part.partysize == 1)
+                            part.Partysize = Game.Instance.Player.Party.Count();
+                            if (part.Partysize == 1)
                             {
-                                part.partysize = 6;
+                                part.Partysize = 6;
                                 UIUtility.SendWarning("Solo mode is not supported!");
                             }
-                            else if (part.partysize == 6)
+                            else if (part.Partysize == 6)
                             {
                                 UIUtility.SendWarning("Nothing happened!");
                             }
                             else
                             {
-                                UIUtility.SendWarning("Your party size is " + part.partysize.ToString() + ", no going back!");
+                                UIUtility.SendWarning("Your party size is " + part.Partysize.ToString() + ", no going back!");
                             }
                         }
                         Game.Instance.Player.FixPartyAfterChange(true);

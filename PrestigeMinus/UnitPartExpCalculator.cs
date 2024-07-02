@@ -12,26 +12,81 @@ using Kingmaker;
 using BlueprintCore.Blueprints.References;
 using Kingmaker.Settings;
 using Kingmaker.UI.Common;
+using BlueprintCore.Utils;
+using Kingmaker.Blueprints;
+using Kingmaker.UnitLogic.Buffs;
+using Kingmaker.Designers;
 
 namespace PrestigeMinus
 {
-    internal class UnitPartExpCalculator : OldStyleUnitPart
+    internal class UnitPartExpCalculator : UnitPart
     {
-        public int realexp = 0;
-
-        public int partysize = 6;
-        public int TrySizeUp()
+        public int Realexp 
         {
-            if (partysize >= 6) { return -1; }
-            int willbesize = partysize + 1;
-            int level20exp = 3600000;
-            int expneeded = level20exp * willbesize / 6;
-            if (realexp >= expneeded) 
+            get 
             {
-                partysize += 1;
+                var fact = Owner.GetFact(RealexpBuff);
+                if (fact != null)
+                {
+                    return fact.GetRank();
+                }
                 return 0;
             }
-            return expneeded - realexp;
+            set
+            {
+                var fact = Owner.GetFact(RealexpBuff) as Buff;
+                if (fact != null)
+                {
+                    fact.SetRank(value);
+                }
+                else
+                {
+                    fact = Owner.AddBuff(RealexpBuff, Owner);
+                    fact.SetRank(value);
+                }
+            }
+        }
+
+        public int Partysize
+        {
+            get
+            {
+                var fact = Owner.GetFact(RealexpBuff);
+                if (fact != null)
+                {
+                    return fact.GetRank();
+                }
+                return 0;
+            }
+            set
+            {
+                var fact = Owner.GetFact(RealexpBuff) as Buff;
+                if (fact != null)
+                {
+                    fact.SetRank(value);
+                }
+                else
+                {
+                    fact = Owner.AddBuff(RealexpBuff, Owner);
+                    fact.SetRank(value);
+                }
+            }
+        }
+
+        private static readonly BlueprintBuffReference RealexpBuff = BlueprintTool.GetRef<BlueprintBuffReference>(MinusAbility.SuperAbilitybuffGuid);
+        private static readonly BlueprintBuffReference PartysizeBuff = BlueprintTool.GetRef<BlueprintBuffReference>(MinusAbility.SuperAbility2buffGuid);
+        public int TrySizeUp()
+        {
+            if (Partysize >= 6) { return -1; }
+            int willbesize = Partysize + 1;
+            int level20exp = 3600000;
+            int expneeded = level20exp * willbesize / 6;
+            if (Realexp >= expneeded) 
+            {
+                Partysize += 1;
+                return 0;
+            }
+            return expneeded - Realexp;
         }
     }
 
@@ -47,13 +102,13 @@ namespace PrestigeMinus
                 {
                     Main.Logger.Info("Original exp: " + exp.ToString());
                     var part = kc.Ensure<UnitPartExpCalculator>();
-                    part.realexp += exp;
+                    part.Realexp += exp;
                     if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                     {
-                        part.partysize = 6;
+                        part.Partysize = 6;
                         return;
                     }
-                    exp = exp * 6 / part.partysize;
+                    exp = exp * 6 / part.Partysize;
                     Main.Logger.Info("Altered exp: " + exp.ToString());
                     if (SettingsRoot.Difficulty.OnlyActiveCompanionsReceiveExperience || SettingsRoot.Difficulty.OnlyInitiatorReceiveSkillCheckExperience)
                     {
@@ -78,7 +133,7 @@ namespace PrestigeMinus
                 if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
                 {
                     var part = kc.Ensure<UnitPartExpCalculator>();
-                    part.partysize = 6;
+                    part.Partysize = 6;
                     return;
                 }
                 if (kc != __instance.Owner.Unit) { return; }
