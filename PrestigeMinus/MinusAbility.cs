@@ -24,8 +24,8 @@ namespace PrestigeMinus
 {
     internal class MinusAbility
     {
-        private static readonly string StyleDisplayName = "MinusAbility.Name";
-        private static readonly string StyleDescription = "MinusAbility.Description";
+        private static readonly string SuperDisplayName = "MinusAbility.Name";
+        private static readonly string SuperDescription = "MinusAbility.Description";
 
         private const string SuperAbility = "MinusAbility.SuperAbility";
         private static readonly string SuperAbilityGuid = "{8DAEED2C-92E9-498B-A543-C33C53C05ED9}";
@@ -57,8 +57,41 @@ namespace PrestigeMinus
                 .AddAbilityEffectRunAction(ActionsBuilder.New()
                     .Add<MinusShowPartySelection>()
                     .Build())
-                .SetDisplayName(StyleDisplayName)
-                .SetDescription(StyleDescription)
+                .SetDisplayName(SuperDisplayName)
+                .SetDescription(SuperDescription)
+                .SetIcon(icon)
+                .SetRange(AbilityRange.Personal)
+                .SetType(AbilityType.Special)
+                .SetActionType(Kingmaker.UnitLogic.Commands.Base.UnitCommand.CommandType.Free)
+                .AddAbilityCasterInCombat(true)
+                .SetActionBarAutoFillIgnored(true)
+                .AddHideFeatureInInspect()
+                .AddComponent<AbilityRequirementKC>()
+                .AddAbilityCasterHasNoFacts([FeatureRefs.SwarmFormFeature.ToString()])
+                .Configure();
+
+            FeatureConfigurator.For(FeatureRefs.SkillAbilities)
+                    .AddFacts([ability])
+                    .Configure();
+        }
+
+        private static readonly string SizeUpDisplayName = "MinusAbility.Name";
+        private static readonly string SizeUpDescription = "MinusAbility.Description";
+
+        private const string SizeUpAbility = "MinusAbility.SizeUpAbility";
+        private static readonly string SizeUpAbilityGuid = "{A584EF78-C29C-49F8-A256-B77BC1F678A1}";
+        public static void Configure2()
+        {
+            var icon = AbilityRefs.BurstOfGlory.Reference.Get().Icon;
+
+            var ability = AbilityConfigurator.New(SizeUpAbility, SizeUpAbilityGuid)
+                .AddComponent(AbilityRefs.BurstOfGlory.Reference.Get().GetComponent<AbilitySpawnFx>())
+                .SetAnimation(Kingmaker.Visual.Animation.Kingmaker.Actions.UnitAnimationActionCastSpell.CastAnimationStyle.Immediate)
+                .AddAbilityEffectRunAction(ActionsBuilder.New()
+                    .Add<MinusPartySizeUp>()
+                    .Build())
+                .SetDisplayName(SizeUpDisplayName)
+                .SetDescription(SizeUpDescription)
                 .SetIcon(icon)
                 .SetRange(AbilityRange.Personal)
                 .SetType(AbilityType.Special)
@@ -125,22 +158,6 @@ namespace PrestigeMinus
                     UIUtility.SendWarning("Choose your party size!");
                     isnew = true;
                 }
-                else
-                {
-                    int exp = part.TrySizeUp();
-                    if (exp == 0)
-                    {
-                        UIUtility.SendWarning("Ready to increase party size to " + part.Partysize.ToString());
-                    }
-                    else if (exp > 1)
-                    {
-                        UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
-                    }
-                    else
-                    {
-                        UIUtility.SendWarning("Party size is 6");
-                    }
-                }
                 EventBus.RaiseEvent<IGroupChangerHandler>(delegate (IGroupChangerHandler h)
                 {
                     h.HandleCall(delegate
@@ -176,6 +193,39 @@ namespace PrestigeMinus
                         }
                     }, true, null, null);
                 }, true);
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
+        }
+    }
+
+    public class MinusPartySizeUp : GameAction
+    {
+        // Token: 0x0600F521 RID: 62753 RVA: 0x003E255A File Offset: 0x003E075A
+        public override string GetCaption()
+        {
+            return "Minus Party Size Up";
+        }
+
+        // Token: 0x0600F522 RID: 62754 RVA: 0x003E2561 File Offset: 0x003E0761
+        public override void RunAction()
+        {
+            try
+            {
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                var part = kc.Ensure<UnitPartExpCalculator>();
+                int exp = part.TrySizeUp();
+                if (exp == 0)
+                {
+                    UIUtility.SendWarning("Party size up! Now is " + part.Partysize.ToString());
+                }
+                else if (exp > 1)
+                {
+                    UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
+                }
+                else
+                {
+                    UIUtility.SendWarning("Party size is 6");
+                }
             }
             catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
         }

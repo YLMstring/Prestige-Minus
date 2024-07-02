@@ -83,6 +83,7 @@ namespace PrestigeMinus
             int expneeded = level20exp * willbesize / 6;
             if (Realexp >= expneeded) 
             {
+                Partysize += 1;
                 return 0;
             }
             return expneeded - Realexp;
