@@ -132,12 +132,6 @@ namespace PrestigeMinus
             try
             {
                 var kc = Game.Instance.Player.MainCharacter.Value;
-                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
-                {
-                    var part = kc.Ensure<UnitPartExpCalculator>();
-                    part.Partysize = 6;
-                    return;
-                }
                 if (kc != __instance.Owner.Unit) { return; }
                 foreach (var unit in Game.Instance.Player.Party)
                 {

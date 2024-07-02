@@ -38,11 +38,6 @@ namespace PrestigeMinus
                         h.HandleCall(delegate
                         {
                             Game.Instance.Player.FixPartyAfterChange(true);
-                            foreach (var unit in Game.Instance.Player.Party)
-                            {
-                                if (unit == kc) { continue; }
-                                unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
-                            }
                         }, delegate
                         {
                             //cancel button
@@ -79,11 +74,6 @@ namespace PrestigeMinus
                         h.HandleCall(delegate
                         {
                             Game.Instance.Player.FixPartyAfterChange(true);
-                            foreach (var unit in Game.Instance.Player.Party)
-                            {
-                                if (unit == kc) { continue; }
-                                unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
-                            }
                         }, delegate
                         {
                             //cancel button

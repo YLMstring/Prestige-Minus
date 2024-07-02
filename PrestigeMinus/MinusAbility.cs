@@ -148,11 +148,6 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 bool isnew = false;
-                if (kc.Progression.GetClassLevel(CharacterClassRefs.SwarmThatWalksClass.Reference) > 0)
-                {
-                    part.Partysize = 6;
-                    return;
-                }
                 if (part.Partysize == 6 && part.Realexp < 3600000)
                 {
                     UIUtility.SendWarning("Choose your party size!");
@@ -180,11 +175,6 @@ namespace PrestigeMinus
                             }
                         }
                         Game.Instance.Player.FixPartyAfterChange(true);
-                        foreach (var unit in Game.Instance.Player.Party)
-                        {
-                            if (unit == kc) { continue; }
-                            unit.Progression.AdvanceExperienceTo(kc.Progression.Experience);
-                        }
                     }, delegate
                     {
                         if (isnew)
