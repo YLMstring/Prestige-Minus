@@ -1,0 +1,28 @@
+[
+  {
+    "Key": "MinusMainAbility.Name",
+    "ProcessTemplates": false,
+    "enGB": "Prestige Minus",
+    "zhCN": "你不配！",
+    "ruRU": "Prestige Minus"
+  },
+  {
+    "Key": "MinusMainAbility.Description",
+    "enGB": "Gather your party, then if your maximum party size is not set, it's set to the current size.",
+    "ruRU": "Gather your party, then if your maximum party size is not set, it's set to the current size.",
+    "zhCN": "召集队伍，若你尚未设定最大队伍人数，将其设定为调整后的队伍人数。"
+  },
+  {
+    "Key": "MinusSizeUpAbility.Name",
+    "ProcessTemplates": false,
+    "enGB": "Prestige Plus",
+    "zhCN": "配了配了",
+    "ruRU": "Prestige Plus"
+  },
+  {
+    "Key": "MinusSizeUpAbility.Description",
+    "enGB": "You can increase your maximum party size after reaching certain exp threhold.",
+    "ruRU": "You can increase your maximum party size after reaching certain exp threhold.",
+    "zhCN": "在获取足够经验值之后，你便可以提升最大队伍人数。"
+  }
+]
