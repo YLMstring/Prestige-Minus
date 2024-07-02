@@ -35,7 +35,7 @@ namespace PrestigeMinus
 
         private const string SuperAbility2buff = "SuperAbility.SuperAbility2buff";
         public static readonly string SuperAbility2buffGuid = "{E9386587-79B5-427B-8FD6-43D30D5ADA1E}";
-        public static void StyleConfigure()
+        public static void Configure()
         {
             var icon = AbilityRefs.TricksterTrickFate.Reference.Get().Icon;
 

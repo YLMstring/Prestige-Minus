@@ -57,7 +57,8 @@ public static class Main {
                 }
                 Logger.Info("Prestige Minus started");
                 Initialized = true;
-                MinusAbility.StyleConfigure();
+                MinusAbility.Configure();
+                Above20.Patch();
             }
             catch (Exception e) { Logger.Error("Prestige Minus failed", e); }
 
