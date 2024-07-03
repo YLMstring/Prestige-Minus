@@ -16,12 +16,12 @@
 - If party size is 4, you gain 1.5x expirience
 - If party size is 5, you gain 1.2x expirience
 ### Enlarge Party
-- With Prestige Plus ability, you can increase your party size after reaching certain exp threhold
-- If you could have reached lv20 with a party of 3, the maximum party size becomes 3
-- If you could have reached lv20 with a party of 4, the maximum party size becomes 4
-- If you could have reached lv20 with a party of 5, the maximum party size becomes 5
-- If you could have reached lv20 with a party of 6, the maximum party size becomes 6
-- If you gain any swarm level, the party size will immediately be forced to 6
+- With Prestige Plus ability, a lv20 knight commander can increase her party size after reaching certain exp threhold (40 for Legend)
+- If she could have reached lv20 with a party of 3, the maximum party size becomes 3
+- If she could have reached lv20 with a party of 4, the maximum party size becomes 4
+- If she could have reached lv20 with a party of 5, the maximum party size becomes 5
+- If she could have reached lv20 with a party of 6, the maximum party size becomes 6
+- If she gains any swarm level, the party size will immediately be forced to 6
 
 ## Thanks to  
 -   WittleWolfie for his [Blueprint-Core](https://wittlewolfie.github.io/WW-Blueprint-Core/index.html)
