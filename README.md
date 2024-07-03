@@ -9,7 +9,7 @@
 - Level 1-21 use tabletop exp table, while level 21-24 is the same as level 20-21
 - Companions' exp always match your own exp
 ### Reduce Party
-- With Prestige Minus ability, you can set your party size (2-5)
+- With Prestige Minus ability, you can set your party size (2-5, before reaching lv20)
 - Once it's set, there's no going back
 - If party size is 2, you gain 3x expirience
 - If party size is 3, you gain 2x expirience
