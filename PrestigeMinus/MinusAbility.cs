@@ -150,7 +150,7 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 bool isnew = false;
-                if (part.Partysize == 6 && part.Realexp < 3600000)
+                if (part.Partysize == 6 && part.Realexp < 3600000 && kc.Progression.CharacterLevel < 20)
                 {
                     UIUtility.SendWarning("Choose your party size!");
                     isnew = true;
@@ -217,7 +217,7 @@ namespace PrestigeMinus
                 }
                 else if (exp > 1)
                 {
-                    UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
+                    UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size increase: " + exp.ToString());
                 }
                 else
                 {
