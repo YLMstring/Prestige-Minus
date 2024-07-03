@@ -5,7 +5,7 @@
 ### Reasons to install the mod
 - Play WotR with a smaller party!!!
 - Gather your party anytime, anywhere with Prestige Minus ability
-- Level cap is now 24!
+- Level cap is now 24! (44 for Legend)
 - Level 1-21 use tabletop exp table, while level 21-24 is the same as level 20-21
 - Companions' exp always match your own exp
 ### Reduce Party
