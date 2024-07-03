@@ -205,6 +205,11 @@ namespace PrestigeMinus
             {
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Ensure<UnitPartExpCalculator>();
+                if (kc.Progression.CharacterLevel != 20 && kc.Progression.CharacterLevel != 40)
+                {
+                    UIUtility.SendWarning("Only a lv20 knight commander can increase her party size!");
+                    return;
+                }
                 int exp = part.TrySizeUp();
                 if (exp == 0)
                 {
