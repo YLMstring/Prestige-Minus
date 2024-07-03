@@ -58,7 +58,7 @@ namespace PrestigeMinus
                 {
                     return fact.GetRank();
                 }
-                return 5;
+                return 6;
             }
             set
             {
@@ -80,8 +80,7 @@ namespace PrestigeMinus
         public int TrySizeUp()
         {
             if (Partysize >= 6) { return -1; }
-            if (Partysize == 5) { return -2; }
-            int willbesize = Partysize + 2;
+            int willbesize = Partysize + 1;
             int level20exp = 3600000;
             int expneeded = level20exp * willbesize / 6;
             if (Realexp >= expneeded) 
