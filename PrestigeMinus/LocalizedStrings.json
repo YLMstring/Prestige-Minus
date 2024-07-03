@@ -21,8 +21,8 @@
   },
   {
     "Key": "MinusSizeUpAbility.Description",
-    "enGB": "You can increase your party size after reaching certain exp threhold.",
-    "ruRU": "You can increase your party size after reaching certain exp threhold.",
-    "zhCN": "在获取足够经验值之后，你便可以提升最大队伍人数。"
+    "enGB": "A lv20 knight commander can increase her party size after reaching certain exp threhold.",
+    "ruRU": "A lv20 knight commander can increase her party size after reaching certain exp threhold.",
+    "zhCN": "在获取足够经验值之后，一名20级的指挥官可以提升其最大队伍人数。"
   }
 ]
