@@ -150,7 +150,7 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 bool isnew = false;
-                if (part.Partysize == 6 && part.Realexp < 3600000)
+                if (part.Partysize == 5 && part.Realexp < 3600000)
                 {
                     UIUtility.SendWarning("Choose your party size!");
                     isnew = true;
@@ -164,10 +164,10 @@ namespace PrestigeMinus
                             part.Partysize = Game.Instance.Player.Party.Count();
                             if (part.Partysize == 1)
                             {
-                                part.Partysize = 6;
+                                part.Partysize = 5;
                                 UIUtility.SendWarning("Solo is not supported!");
                             }
-                            else if (part.Partysize == 6)
+                            else if (part.Partysize == 5)
                             {
                                 UIUtility.SendWarning("Nothing happened!");
                             }
@@ -214,9 +214,13 @@ namespace PrestigeMinus
                 {
                     UIUtility.SendWarning("Party size is " + part.Partysize.ToString() + ". Raw EXP needed for next party size up: " + exp.ToString());
                 }
-                else
+                else if (exp == -1)
                 {
                     UIUtility.SendWarning("Party size is 6");
+                }
+                else
+                {
+                    UIUtility.SendWarning("Party size is 5");
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to MinusShowPartySelection", e); }
