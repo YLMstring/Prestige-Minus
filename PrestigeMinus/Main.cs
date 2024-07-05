@@ -55,7 +55,7 @@ public static class Main {
                     Logger.Info("Prestige Minus started already");
                     return;
                 }
-                Logger.Info("Prestige Minus started..");
+                Logger.Info("Prestige Minus started...");
                 Initialized = true;
                 MinusAbility.Configure();
                 MinusAbility.Configure2();

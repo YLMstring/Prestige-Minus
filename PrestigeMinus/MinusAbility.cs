@@ -43,12 +43,14 @@ namespace PrestigeMinus
               .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
               .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
               .SetRanks(7800000)
+              .SetStacking(Kingmaker.UnitLogic.Buffs.Blueprints.StackingType.Ignore)
               .Configure();
 
             var BuffSuperAbility2 = BuffConfigurator.New(SuperAbility2buff, SuperAbility2buffGuid)
               .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.HiddenInUi)
               .AddToFlags(Kingmaker.UnitLogic.Buffs.Blueprints.BlueprintBuff.Flags.StayOnDeath)
               .SetRanks(6)
+              .SetStacking(Kingmaker.UnitLogic.Buffs.Blueprints.StackingType.Ignore)
               .Configure();
 
             var ability = AbilityConfigurator.New(SuperAbility, SuperAbilityGuid)

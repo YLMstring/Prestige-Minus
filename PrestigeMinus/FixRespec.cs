@@ -19,14 +19,8 @@ namespace PrestigeMinus
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 var part = kc.Ensure<UnitPartExpCalculator>();
                 var part2 = __instance.Ensure<UnitPartExpCalculator>();
-                if (part.Realexp > 1)
-                {
-                    part2.Realexp = part.Realexp - 1;
-                }
-                if (part.Partysize > 1)
-                {
-                    part2.Partysize = part.Partysize - 1;
-                }
+                part2.Realexp = part.Realexp;
+                part2.Partysize = part.Partysize;
             }
             catch (Exception e) { Main.Logger.Error("Failed to FixRespec", e); }
         }
