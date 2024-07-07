@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Kingmaker.UI.MVVM._VM.GroupChanger;
+using Kingmaker.UnitLogic.Class.LevelUp;
 
 namespace PrestigeMinus
 {
@@ -56,6 +57,24 @@ namespace PrestigeMinus
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to PartyLimitFix2", e); }
+        }
+    }
+
+    [HarmonyPatch(typeof(LevelUpController), nameof(LevelUpController.CanLevelUp))]
+    internal class PartyLimitFix3
+    {
+        static void Postfix(ref bool __result, ref UnitDescriptor unit)
+        {
+            try
+            {
+                if (__result == false) return;
+                var kc = Game.Instance.Player.MainCharacter.Value;
+                if (unit.Progression.CharacterLevel >= kc.Progression.CharacterLevel)
+                {
+                    __result = false;
+                }
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to PartyLimitFix3", e); }
         }
     }
 }
