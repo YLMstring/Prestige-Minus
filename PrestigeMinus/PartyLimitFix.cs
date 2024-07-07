@@ -70,7 +70,7 @@ namespace PrestigeMinus
                 if (__result == false) return;
                 var kc = Game.Instance.Player.MainCharacter.Value;
                 if (kc == unit) return;
-                if (unit.Progression.CharacterLevel >= kc.Progression.CharacterLevel)
+                if (unit.Progression.CharacterLevel > 0 && unit.Progression.CharacterLevel >= kc.Progression.CharacterLevel)
                 {
                     __result = false;
                 }
