@@ -61,7 +61,7 @@ public static class Main {
                 MinusAbility.Configure2();
                 Above20.Patch();
             }
-            catch (Exception e) { Logger.Error("Prestige Minus failed", e); }
+            catch (Exception e) { Logger.Error("Prestige Minus failed!", e); }
 
         }
     }
