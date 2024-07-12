@@ -39,12 +39,12 @@ namespace PrestigeMinus
                 var fact = Owner.GetFact(RealexpBuff) as Buff;
                 if (fact != null)
                 {
-                    fact.SetRank(value);
+                    fact.Rank = value;
                 }
                 else
                 {
                     fact = Owner.AddBuff(RealexpBuff, Owner);
-                    fact.SetRank(value);
+                    fact.Rank = value;
                 }
             }
         }
@@ -65,12 +65,12 @@ namespace PrestigeMinus
                 var fact = Owner.GetFact(PartysizeBuff) as Buff;
                 if (fact != null)
                 {
-                    fact.SetRank(value);
+                    fact.Rank = value;
                 }
                 else
                 {
                     fact = Owner.AddBuff(PartysizeBuff, Owner);
-                    fact.SetRank(value);
+                    fact.Rank = value;
                 }
             }
         }
