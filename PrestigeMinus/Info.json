@@ -2,7 +2,7 @@
   "Id": "PrestigeMinus",
   "DisplayName": "Prestige Minus",
   "Author": "string",
-  "Version": "0.9.6",
+  "Version": "0.9.7",
   "ManagerVersion": "0.27.11",
   "Requirements": [],
   "AssemblyName": "PrestigeMinus.dll",
