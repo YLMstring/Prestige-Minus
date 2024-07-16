@@ -2,9 +2,6 @@
 ## Requirements: Owlcat custom experience options turned off
 - The mod does not require [Prestige Plus](https://github.com/YLMstring/Prestige-Plus)
 - Features are not toggleable
-### Known issues
-- If you have less than 5 people in the prologue bad things happen
-- I'll deal with this!
 ### Reasons to install the mod
 - Play WotR with a smaller party!!!
 - Gather your party anytime, anywhere with Prestige Minus ability
