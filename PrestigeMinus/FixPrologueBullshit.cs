@@ -31,4 +31,25 @@ namespace PrestigeMinus
             catch (Exception e) { Main.Logger.Error("Failed to FixPrologueBullshit", e); }
         }
     }
+
+    [HarmonyPatch(typeof(DialogSpeaker), nameof(DialogSpeaker.GetEntity))]
+    internal class FixPrologueBullshit2
+    {
+        static void Postfix(ref UnitEntityData __result, ref DialogSpeaker __instance)
+        {
+            try
+            {
+                if (Game.Instance.Player.Chapter > 0)
+                {
+                    return;
+                }
+                var ins = __instance;
+                if (Game.Instance.Player.RemoteCompanions.Any(p => p.Blueprint == ins.Blueprint))
+                {
+                    __result = Game.Instance.Player.MainCharacter;
+                }
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to FixPrologueBullshit2", e); }
+        }
+    }
 }
