@@ -86,6 +86,7 @@ namespace PrestigeMinus
             if (Realexp >= expneeded) 
             {
                 Partysize += 1;
+                Owner.Progression.Experience = Realexp * 6 / Partysize;
                 return 0;
             }
             return expneeded - Realexp;
