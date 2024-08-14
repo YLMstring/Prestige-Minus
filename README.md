@@ -6,7 +6,7 @@
 - Play WotR with a smaller party!!!
 - Gather your party anytime, anywhere with Prestige Minus ability
 - Level cap is now 24! (44 for Legend)
-- Level 1-21 use tabletop exp table, while level 21-24 is the same as level 20-21
+- Level 1-22 use tabletop exp table, while level 21-24 is the same as level 20-21
 - Companion level and exp always match your own
 ### Reduce Party
 - With Prestige Minus ability, you can set your party size (2-5, before reaching lv20)
@@ -21,6 +21,7 @@
 - If she could have reached lv20 with a party of 4, the maximum party size becomes 4
 - If she could have reached lv20 with a party of 5, the maximum party size becomes 5
 - If she could have reached lv20 with a party of 6, the maximum party size becomes 6
+- Her exp gained will also be adjusted accordingly
 - If she gains any swarm level, the party size will immediately be forced to 6
 
 ## Thanks to  
