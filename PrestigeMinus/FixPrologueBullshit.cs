@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Kingmaker.Blueprints;
 using Kingmaker.Blueprints.JsonSystem;
 using Kingmaker.ElementsSystem;
-using Kingmaker.EntitySystem.Persistence.Versioning;
+using Cond = Kingmaker.Designers.EventConditionActionSystem.Conditions;
 using Kingmaker.UnitLogic.Parts;
 using Kingmaker.Designers.EventConditionActionSystem.Evaluators;
 using UnityEngine;
@@ -87,6 +87,31 @@ namespace PrestigeMinus
                 }
             }
             catch (Exception e) { Main.Logger.Error("Failed to FixPrologueBullshit3", e); }
+        }
+    }
+
+    [HarmonyPatch(typeof(Cond.CompanionInParty), nameof(Cond.CompanionInParty.CheckCondition))]
+    internal class FixPrologueBullshit4
+    {
+        static void Postfix(ref bool __result, ref Cond.CompanionInParty __instance)
+        {
+            try
+            {
+                if (Game.Instance.Player.Chapter > 0)
+                {
+                    return;
+                }
+                var ins = __instance;
+                if (__result || !ins.MatchWhenActive || ins.MatchWhenRemote)
+                {
+                    return;
+                }
+                if (Game.Instance.Player.RemoteCompanions.Any(p => p.Blueprint == ins.m_companion?.Get()))
+                {
+                    __result = true;
+                }
+            }
+            catch (Exception e) { Main.Logger.Error("Failed to FixPrologueBullshit4", e); }
         }
     }
 }
