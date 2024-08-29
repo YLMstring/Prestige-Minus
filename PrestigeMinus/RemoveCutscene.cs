@@ -12,8 +12,8 @@ namespace PrestigeMinus
     {
         public static void Configure()
         {
-            var cut = BlueprintTool.GetRef<CutsceneReference>("a1c7c446015a478eb7c75249a6a783a3");
-            cut.Get().m_Tracks.RemoveAt(0);
+            var cut = BlueprintTool.GetRef<CutsceneReference>("e02e5defabc90454ea348e7fdce7ea25");
+            cut.Get().Priority = Kingmaker.AreaLogic.Cutscenes.CutscenePriority.Reaction;
         }
     }
 }
