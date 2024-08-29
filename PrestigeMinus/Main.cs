@@ -60,6 +60,7 @@ public static class Main {
                 MinusAbility.Configure();
                 MinusAbility.Configure2();
                 Above20.Patch();
+                RemoveCutscene.Configure();
             }
             catch (Exception e) { Logger.Error("Prestige Minus failed", e); }
 
